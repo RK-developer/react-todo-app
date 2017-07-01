@@ -1,6 +1,6 @@
-#Sound Clip Sharing Site
+# Sound Clip Sharing Site
 
-##Stack
+## Stack
 
 React - a JavaScript library for building user interfaces.
 Redux - a predictable state container for JavaScript apps
