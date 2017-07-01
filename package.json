@@ -4,8 +4,19 @@
   "description": "##Stack",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev-client": "webpack-dev-server",
+    "dev-server": "nodemon --exec 'NODE_ENV=development node ./server/server.js'"
+
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "webpack-dev-server": "^2.5.0"
+  },
+  "dependencies": {
+    "express": "^4.15.3",
+    "nodemon": "^1.11.0",
+    "react": "^15.6.1",
+    "webpack": "^3.0.0"
+  }
 }
