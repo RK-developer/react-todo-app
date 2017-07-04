@@ -1,15 +1,15 @@
 const express = require('express'),
       path = require('path')
-
+const fs = require('fs');
 app = express()
 
 const sendHTMLpage = (req, res) => {
 
     bundle = ``
     if (process.env.NODE_ENV == 'development') {
-      bundle = `<script src="http://localhost:8080/assets/bundle.js"></script>`
+        bundle = `<script src="http://localhost:8080/assets/bundle.js"></script>`
     } else {
-      bundle = `<script src="assets/bundle.js"></script>`
+        bundle = `<script src="assets/bundle.js"></script>`
     }
 
     return_html = `
@@ -19,7 +19,8 @@ const sendHTMLpage = (req, res) => {
         <title>Served</title>
     </head>
     <body>
-        <div id="react-container"></div>` + bundle + `
+        <div id="react-container"></div>
+        ` + bundle + `
     </body>
 </html>`
 
@@ -33,11 +34,21 @@ const logger = (req, res, next) => {
 }
 
 app.use(logger)
-app.use(sendHTMLpage)
 
+var filepath = path.join(__dirname, 'song.wav')
+
+app.get('/music', function(req, res){
+    res.set({'Content-Type': 'audio/mpeg'});
+    var readStream = fs.createReadStream(filepath);
+    readStream.pipe(res);
+})
+
+app.get('/', (req, res) => {
+    sendHTMLpage(req, res);
+})
 
 app.listen(process.env.PORT || 3000, function () {
-  console.log('Example app listening on port ' + (process.env.PORT || 3000))
+    console.log('Example app listening on port ' + (process.env.PORT || 3000))
 })
 
 module.exports = app

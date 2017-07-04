@@ -1,5 +1,10 @@
 import React from 'react'
-
+import { render } from 'react-dom'
 window.React = React
 
-console.log("bundle.js served")
+import TestAudio from './components/TestAudio'
+
+render(
+  <TestAudio />,
+  document.getElementById("react-container")
+)
