@@ -1,4 +1,4 @@
-import {Component} from 'react'
+import { Component } from 'react'
 
 //Testing web audio api
 class TestAudio extends Component {
@@ -15,8 +15,6 @@ class TestAudio extends Component {
             context.decodeAudioData(Data, function(buffer){
                 source.buffer = buffer
                 source.connect(context.destination)
-                // source.playbackRate.value = 6
-                // source.detune.value = -3000
                 context.suspend()
                 source.start(context.currentTime)
                 context.suspend()
