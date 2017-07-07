@@ -10,6 +10,10 @@ export const todos = (state={}, action) => {
                     title: action.title
                 }
             ]
+        case C.REMOVE_TODO:
+            return state.filter(
+                c => c.id !== action.id
+            )
         default :
             return state
     }

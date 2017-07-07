@@ -6,3 +6,8 @@ export const addTodo = (title) => ({
         id: v4(),
         title
     })
+
+export const removeTodo = (id) => ({
+        type: C.REMOVE_TODO,
+        id: id
+    })

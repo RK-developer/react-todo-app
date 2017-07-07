@@ -12,6 +12,8 @@ module.exports = {
     },
     devServer: {
         contentBase: "./build",
+        //host: '192.168.1.5',
+        //port: '8080'
     },
     module: {
         loaders:  [{
@@ -21,6 +23,9 @@ module.exports = {
                 query: {
                     presets: ['env', 'react', 'stage-0']
                 }
+            },{
+                test: /\.css$/,
+                loader: "style-loader!css-loader"
             }]
     }
 };
