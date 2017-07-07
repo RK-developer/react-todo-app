@@ -1,4 +1,4 @@
-# Sound Clip Sharing Site
+# React Todo App
 
 ## Stack
 
