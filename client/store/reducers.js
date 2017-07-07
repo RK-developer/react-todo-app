@@ -14,6 +14,16 @@ export const todos = (state={}, action) => {
             return state.filter(
                 c => c.id !== action.id
             )
+        case C.EDIT_TODO:
+            return state.map((todo, i) => {
+                if (todo.id === action.id) {
+                    return {
+                        id: todo.id,
+                        title: action.title
+                    }
+                }
+                return todo
+            })
         default :
             return state
     }
