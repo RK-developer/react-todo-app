@@ -1,10 +1,23 @@
 const express = require('express'),
       path = require('path')
-const fs = require('fs');
+// const fs = require('fs');
+
+//loads MONGOLAB_URI into process.env read from file .env
+require('dotenv').config()
+
 app = express()
 
-var todoApi =require('./routes')
-app.use('/api', todoApi)
+var todoApi = require('./routes')
+var bodyParser = require('body-parser')
+
+var mongoose = require('mongoose')
+mongoose.connect(process.env.MONGOLAB_URI)
+mongoose.connection.on('error', () => {
+	console.error('MongoDB Connection Error. Please make sure that MongoDB is running.')
+	process.exit(1)
+})
+
+
 
 const sendHTMLpage = (req, res) => {
 
@@ -37,15 +50,18 @@ const logger = (req, res, next) => {
     next()
 }
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(logger)
+app.use('/api', todoApi)
 
-var filepath = path.join(__dirname, 'song.wav')
-
-app.get('/music', function(req, res){
-    res.set({'Content-Type': 'audio/mpeg'});
-    var readStream = fs.createReadStream(filepath);
-    readStream.pipe(res);
-})
+// var filepath = path.join(__dirname, 'song.wav')
+//
+// app.get('/music', function(req, res){
+//     res.set({'Content-Type': 'audio/mpeg'});
+//     var readStream = fs.createReadStream(filepath);
+//     readStream.pipe(res);
+// })
 
 app.get('/', (req, res) => {
     sendHTMLpage(req, res);

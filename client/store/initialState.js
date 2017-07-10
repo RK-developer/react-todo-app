@@ -15,4 +15,8 @@ const stateData = {
     ]
 }
 
-export default stateData
+const emptyData = {
+    todos: []
+}
+
+export default emptyData
