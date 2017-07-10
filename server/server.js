@@ -3,6 +3,9 @@ const express = require('express'),
 const fs = require('fs');
 app = express()
 
+var todoApi =require('./routes')
+app.use('/api', todoApi)
+
 const sendHTMLpage = (req, res) => {
 
     bundle = ``

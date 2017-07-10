@@ -24,6 +24,8 @@ export const todos = (state={}, action) => {
                 }
                 return todo
             })
+        case C.SET_TODOS:
+            return [...action.todos]
         default :
             return state
     }

@@ -3,6 +3,7 @@ import { createStore,
          applyMiddleware } from 'redux'
 import { todos } from './reducers'
 import stateData from './initialState'
+import thunk from 'redux-thunk'
 
 const logger = store => next => action => {
     let result
@@ -21,11 +22,13 @@ const saver = store => next => action => {
 }
 
 const storeFactory = (initialState=stateData) =>
-    applyMiddleware(logger, saver)(createStore)(
+    createStore(
         combineReducers({todos}),
-        (localStorage['redux-store']) ?
+        ((localStorage['redux-store']) ?
             JSON.parse(localStorage['redux-store']) :
             stateData
+        ),
+        applyMiddleware(thunk, logger, saver)
     )
 
 export default storeFactory
