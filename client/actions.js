@@ -65,14 +65,14 @@ export const editTodo = (id, title) => {
 
         //API call to edit todo {id}, with new title: {title}
         return fetch('/api/todos/' + id, {
-                method: 'PUT',
-                body: JSON.stringify({ title: title, id: id}),
-                headers: { "Content-Type": "application/json" }
-            })
-            .then(
-                response => dispatch(fetchTodos()),
-                error => console.log('An error occured.', error)
-            )
+            method: 'PUT',
+            body: JSON.stringify({ title: title, id: id}),
+            headers: { "Content-Type": "application/json" }
+        })
+        .then(
+            response => dispatch(fetchTodos()),
+            error => console.log('An error occured.', error)
+        )
     }
 }
 
@@ -80,13 +80,13 @@ export const editTodo = (id, title) => {
 export const fetchTodos = () => {
     return dispatch => {
         return fetch('/api/todos')
-            .then(
-                response => response.json(),
-                error => console.log('An error occured.', error)
-            )
-            .then(
-                json => dispatch(setTodos(json))
-            )
+        .then(
+            response => response.json(),
+            error => console.log('An error occured.', error)
+        )
+        .then(
+            json => dispatch(setTodos(json))
+        )
     }
 }
 

@@ -1,5 +1,4 @@
 import { PropTypes, Component } from 'react'
-import { addTodo} from '../../actions'
 
 class AddTodoForm extends Component {
 
